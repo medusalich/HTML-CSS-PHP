@@ -6,39 +6,39 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <body>
 
-<?php
-session_start();
+    <?php
 
-$aufgaben = array ("Einkaufen", "Haus putzen", "Programmieren üben", "Essen", "Zocken");
-$aufgaben [] = "bla";
+    session_start();
 
-function aussage(&$aufgabe, $anhang) {
-    $aufgabe [] = $anhang;
+    if (!isset($_SESSION['aufgaben'])) {
+        $_SESSION['aufgaben']  = array("Einkaufen", "Haus putzen", "Programmieren üben", "Essen", "Zocken");
+    }
 
-}
+    function aussage(&$aufgaben, $anhang)
+    {
+        $aufgaben[] = $anhang;
+    }
 
-aussage ($aufgaben, "Kochen");
+    if (isset($_POST["aufgaben"]) && !empty($_POST["anhang"])) {
+        aussage($_SESSION['aufgaben'], $_POST["anhang"]);
+    }
 
-echo "<ul>";
+    echo "<ul>";
 
-foreach ($aufgaben as $aufgabe) {
-    echo "<li>" . $aufgabe . "</li>";
-}
-echo "</ul>";
+    foreach ($_SESSION['aufgaben'] as $aufgabe) {
+        echo "<li>" . $aufgabe . "</li>";
+    }
+    echo "</ul>";
 
-if (isset($_POST["aufgabe"])) {
-    $_SESSION[aussage($aufgaben, "Kochen")] [] = $_POST["aufgabe"];
-}
+    ?>
 
-?>
-
-<form method="POST">
-Neue Aufgabe: <input type="text" name="anhang"><br>
-<input type="submit">
-</form>
+    <form method="POST">
+        Neue Aufgabe: <input type="text" name="anhang"><br>
+        <input type="submit">
+    </form>
 
 </body>
 
