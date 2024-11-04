@@ -13,32 +13,37 @@
 
     session_start();
 
-    if (!isset($_SESSION['aufgaben'])) {
-        $_SESSION['aufgaben']  = array("Einkaufen", "Haus putzen", "Programmieren üben", "Essen", "Zocken");
+    if (!isset($_SESSION["aufgaben"])) {
+        $_SESSION["aufgaben"]  = array("Einkaufen", "Haus putzen", "Programmieren üben", "Essen", "Zocken");
     }
 
-    function aussage(&$aufgaben, $anhang)
-    {
+    function aussage(&$aufgaben, $anhang) {
         $aufgaben[] = $anhang;
     }
 
-    if (isset($_POST["aufgaben"]) && !empty($_POST["anhang"])) {
-        aussage($_SESSION['aufgaben'], $_POST["anhang"]);
+    if (isset($_POST["anhang"]) && !empty($_POST["anhang"])) {
+        aussage($_SESSION["aufgaben"], $_POST["anhang"]);
     }
+
+    ?>
+
+    <form method="POST">
+        Neue Aufgabe: <br>
+        <input type='text' name='anhang'>
+        <input type="submit">
+    </form>
+
+
+    <?php
 
     echo "<ul>";
 
-    foreach ($_SESSION['aufgaben'] as $aufgabe) {
+    foreach ($_SESSION["aufgaben"] as $aufgabe) {
         echo "<li>" . $aufgabe . "</li>";
     }
     echo "</ul>";
 
     ?>
-
-    <form method="POST">
-        Neue Aufgabe: <input type="text" name="anhang"><br>
-        <input type="submit">
-    </form>
 
 </body>
 
