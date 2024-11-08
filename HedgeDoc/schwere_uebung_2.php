@@ -2,16 +2,16 @@
     Erstelle eine HTML-Seite, die jede Aufgabe in einer <ul>-Liste ausgibt.
     Füge eine Funktion hinzu, die eine neue Aufgabe zum Array hinzufügt. 
     Verwende dazu ein HTML-Formular, mit dem der Benutzer Aufgaben hinzufügen kann-->
-
+<?php
+    session_start();
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <body>
 
     <?php
-
-    session_start();
 
     if (!isset($_SESSION["aufgaben"])) {
         $_SESSION["aufgaben"]  = array("Einkaufen", "Haus putzen", "Programmieren üben", "Essen", "Zocken");
@@ -32,7 +32,6 @@
         <input type='text' name='anhang'>
         <input type="submit">
     </form>
-
 
     <?php
 
